@@ -1,0 +1,2 @@
+# django-smsapi
+sms server
