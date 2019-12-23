@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div >
+  {% block content-status %}
+  {% endblock %}
+</div>
+  <form action="/hey/" method="POST" role = "form">
+      {% csrf_token %}
+  <div class="form-group">
+    <label for="mobilenumber">Mobile Number:</label>
+    <input type="text" class="form-control" placeholder="Enter mobile number" id="mobilenumber" name="mobilenumber">
+  </div>
+  <div class="form-group">
+    <label for="textmessage">Message:</label>
+      <textarea type="text" class="form-control" placeholder="Enter Mesxsage" id="textmessage" name="message" rows="5" maxlength="160"> </textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Send</button>
+</form>
+{% endblock %}
