@@ -1,7 +1,11 @@
 from django.shortcuts import render
 from rest_framework import viewsets, status
 from .serializers import SmSerializer
+from .serializers import CollegeSerializer
+from .serializers import MetaSerializer
 from .models import Sm
+from .models import College
+from .models import Meta
 from rest_framework.response import Response
 
 
@@ -10,12 +14,25 @@ class SmViewSet(viewsets.ModelViewSet):
     serializer_class = SmSerializer
 
     def get_queryset(self):
-        """
-        This view should return a list of all the purchases
-        for the currently authenticated user.
-        """
-        user = self.request.user
         return Sm.objects.filter(status=False)
+
+
+class CollegeViewSet(viewsets.ModelViewSet):
+    queryset = College.objects.all().order_by('created_at')
+    serializer_class = CollegeSerializer
+
+    def get_queryset(self):
+        timestamp = self.request.GET.get('timestamp')
+        return College.objects.filter(created_at__gt=timestamp)
+
+
+class MetaViewSet(viewsets.ModelViewSet):
+    queryset = Meta.objects.all().order_by('timestamp')
+    serializer_class = MetaSerializer
+
+    def get_queryset(self):
+        clientid = self.request.GET.get('clientId')
+        return Meta.objects.filter(client_id=clientid)
 
 
 def hey(request):

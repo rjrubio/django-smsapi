@@ -4,6 +4,8 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register(r'sms', views.SmViewSet)
+router.register(r'college', views.CollegeViewSet)
+router.register(r'meta', views.MetaViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
