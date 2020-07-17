@@ -4,6 +4,7 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register(r'sms', views.SmViewSet)
+router.register(r'devices', views.DeviceViewSet)
 router.register(r'college', views.CollegeViewSet)
 router.register(r'meta', views.MetaViewSet)
 

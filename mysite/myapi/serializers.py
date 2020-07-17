@@ -3,6 +3,7 @@ from rest_framework import serializers
 from .models import Sm
 from .models import College
 from .models import Meta
+from .models import Device
 
 
 class SmSerializer(serializers.HyperlinkedModelSerializer):
@@ -15,7 +16,23 @@ class SmSerializer(serializers.HyperlinkedModelSerializer):
             instance.name = validated_data.get('name', instance.name)
             instance.mobilenumber = validated_data.get('mobilenumber', instance.mobilenumber)
             instance.message = validated_data.get('message', instance.message)
-            instance.status = validated_data.get('message', instance.status)
+            instance.status = validated_data.get('status', instance.status)
+
+            instance.save()
+            return instance
+
+
+class DeviceSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Device
+        fields = ('id', 'device_id', 'device_model', 'device_manufacturer', 'status')
+
+        def update(self, instance, validated_data):
+            instance.id = validated_data.get('id', instance.id)
+            instance.device_id = validated_data.get('device_id', instance.device_id)
+            instance.device_model = validated_data.get('device_model', instance.device_model)
+            instance.device_manufacturer = validated_data.get('device_manufacturer', instance.device_manufacturer)
+            instance.status = validated_data.get('status', instance.status)
 
             instance.save()
             return instance

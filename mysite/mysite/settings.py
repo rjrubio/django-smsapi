@@ -39,7 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    "fcm_django",
 ]
+
+FCM_DJANGO_SETTINGS = {
+        "FCM_SERVER_KEY": "AAAAEO9igr4:APA91bGc8RBgYJHseBM2OmoPAflpVBXl_W-H36pzlJ0ss2Xnv6Xg_nf93hUrb0uqeplU3q2FLGnKT839yXzZ_nR5Cz8qwaJrqJnA4ShOzs4HPLtVowzsL22s6ISqdQ5w6sBgDzdCjPXz"
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -120,3 +125,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost','192.168.254.111']
