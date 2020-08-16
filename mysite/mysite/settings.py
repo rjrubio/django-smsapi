@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     "fcm_django",
+    'rest_framework.authtoken',
 ]
 
 FCM_DJANGO_SETTINGS = {
@@ -73,6 +74,12 @@ TEMPLATES = [
         },
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',  # <-- And here
+    ],
+}
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 

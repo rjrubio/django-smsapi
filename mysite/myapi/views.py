@@ -10,9 +10,11 @@ from .models import Meta
 from .models import Device
 from rest_framework.response import Response
 from django.db.models import F
+from rest_framework.permissions import IsAuthenticated
 
 
 class SmViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = Sm.objects.all().order_by('name')
     serializer_class = SmSerializer
 
@@ -24,6 +26,7 @@ class SmViewSet(viewsets.ModelViewSet):
 
 
 class DeviceViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = Device.objects.all().order_by('device_model')
     serializer_class = DeviceSerializer
 
@@ -32,6 +35,7 @@ class DeviceViewSet(viewsets.ModelViewSet):
 
 
 class CollegeViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = College.objects.all().order_by(F('created_at').desc(nulls_last=True))
     serializer_class = CollegeSerializer
 
@@ -50,6 +54,7 @@ class CollegeViewSet(viewsets.ModelViewSet):
 
 
 class MetaViewSet(viewsets.ModelViewSet):
+    permission_classes = (IsAuthenticated,)
     queryset = Meta.objects.all().order_by(F('timestamp').desc(nulls_last=True))
     serializer_class = MetaSerializer
 

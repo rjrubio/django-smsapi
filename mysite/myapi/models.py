@@ -46,7 +46,3 @@ class CustomFCMDevice(AbstractFCMDevice):
     position = models.CharField(max_length=35, blank=False)
     app_version = models.CharField(max_length=35, blank=False)
 
-
-@receiver(signals.post_save, sender=Sm)
-def create_product(sender, instance, created, **kwargs):
-    print("Save method is called")
