@@ -16,9 +16,11 @@ class Sm(models.Model):
 
 class Device(models.Model):
     device_id = models.CharField(max_length=512, null=False, blank=False)
-    device_model = models.CharField(max_length=128)
-    device_manufacturer = models.CharField(max_length=128)
+    device_model = models.CharField(max_length=128, null=True)
+    device_manufacturer = models.CharField(max_length=128, null=True)
     status = models.BooleanField(default=False, null=True, blank=True)
+    clinicid = models.CharField(max_length=128, null=True)
+    created_document_timestamp = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
         return self.device_model

@@ -44,7 +44,7 @@ INSTALLED_APPS = [
 ]
 
 FCM_DJANGO_SETTINGS = {
-        "FCM_SERVER_KEY": "AAAAEO9igr4:APA91bGc8RBgYJHseBM2OmoPAflpVBXl_W-H36pzlJ0ss2Xnv6Xg_nf93hUrb0uqeplU3q2FLGnKT839yXzZ_nR5Cz8qwaJrqJnA4ShOzs4HPLtVowzsL22s6ISqdQ5w6sBgDzdCjPXz"
+        "FCM_SERVER_KEY": "AAAA7cdAZM4:APA91bH8wRY38dS1kYVZqhYccHeNLAyNGkPfhGkGwO6Dv68wa-EX6SWighIEF5bl-PrQ00vJL0S_b4IqnKD3z66ekI_0X7MoTN_Db_N-3mHairG6lW__Wj9p9lJi3sSko8SraN3G9ezI"
 }
 
 MIDDLEWARE = [
@@ -132,4 +132,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost','192.168.254.111']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost','192.168.254.112']

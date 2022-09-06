@@ -25,7 +25,7 @@ class SmSerializer(serializers.HyperlinkedModelSerializer):
 class DeviceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Device
-        fields = ('id', 'device_id', 'device_model', 'device_manufacturer', 'status')
+        fields = ('id', 'device_id', 'device_model', 'device_manufacturer','clinicid', 'status', 'created_document_timestamp')
 
         def update(self, instance, validated_data):
             instance.id = validated_data.get('id', instance.id)
@@ -33,7 +33,9 @@ class DeviceSerializer(serializers.HyperlinkedModelSerializer):
             instance.device_model = validated_data.get('device_model', instance.device_model)
             instance.device_manufacturer = validated_data.get('device_manufacturer', instance.device_manufacturer)
             instance.status = validated_data.get('status', instance.status)
-
+            instance.clinicid = validated_data.get('clinicid', instance.clinicid)
+            instance.created_document_timestamp = validated_data.get('created_document_timestamp', instance.created_document_timestamp)
+            print(instance)
             instance.save()
             return instance
 

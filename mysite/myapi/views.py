@@ -11,6 +11,9 @@ from .models import Device
 from rest_framework.response import Response
 from django.db.models import F
 from rest_framework.permissions import IsAuthenticated
+from pyfcm import FCMNotification
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 
 
 class SmViewSet(viewsets.ModelViewSet):
@@ -26,12 +29,12 @@ class SmViewSet(viewsets.ModelViewSet):
 
 
 class DeviceViewSet(viewsets.ModelViewSet):
-    permission_classes = (IsAuthenticated,)
-    queryset = Device.objects.all().order_by('device_model')
+    #permission_classes = (IsAuthenticated,)
+    queryset = Device.objects.all().order_by('clinicid')
     serializer_class = DeviceSerializer
 
     def get_queryset(self):
-        return Device.objects.filter(status=False)
+        return Device.objects.filter(status=True)
 
 
 class CollegeViewSet(viewsets.ModelViewSet):
@@ -84,6 +87,33 @@ def hey(request):
             return render(request, 'status.html', {
                 'num': data.get('mobilenumber'),
                 'msg': data.get('message')
+            })
+        else:
+            return render(request, 'sendsms.html')
+    except ValueError as e:
+        return Response(e.args[0], status.HTTP_400_BAD_REQUEST)
+
+@csrf_exempt 
+def fcmPush(request):
+    try:
+        if request.method == 'POST':
+            data = request.POST.copy()
+            clinicid = data.get("clinicid")
+            title = data.get("title")
+            icon = "https://healthcare.quetap.ph/assets/images/components/QueTap_1500px.png"
+            print("title" , title)
+            message = data.get("message")
+            print("message" , message)
+            devices = Device.objects.values('device_id','created_document_timestamp').filter(clinicid=clinicid).latest('created_document_timestamp')
+            print(devices)
+            push_service = FCMNotification(api_key=settings.FCM_DJANGO_SETTINGS["FCM_SERVER_KEY"])
+            registration_id = devices['device_id']
+            data_message = { "Title" : title,"body" : message, "icon" : icon }
+            result = push_service.single_device_data_message(registration_id=registration_id, data_message=data_message)
+            print(result)
+            return render(request, 'status.html', {
+                'num': title,
+                'msg': result
             })
         else:
             return render(request, 'sendsms.html')
